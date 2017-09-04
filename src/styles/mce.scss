@@ -1,0 +1,40 @@
+html .mceContentBody {
+	counter-reset: ftnts; 
+}
+
+$em-color : #ff6347;
+$size: 1.2em;
+
+.ftnts-wrapper {
+	box-sizing: border-box;
+	position: relative;
+	display: inline;
+	padding: 0.1em;
+	background-color: rgba($em-color, 0.05);
+	border: 1px dotted rgba($em-color, 0.2);
+	margin-right: $size;
+
+	&:after {
+		position: relative;
+		counter-increment: ftnts;
+		content: counter(ftnts);
+
+		box-sizing: border-box;
+		display: inline-block;
+		pointer-events: none;
+		
+		top: -1em;
+		left: 0.5 * $size;
+		padding: $size / 2 $size / 5;
+		background-color: $em-color;
+		
+		text-align: center;
+		color: white;
+		font-size: $size / 2;
+		line-height: 0;
+		font-weight: normal;
+		font-style: none;
+		font-family: monospace;
+	}
+}
+

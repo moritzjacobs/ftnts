@@ -1,0 +1,27 @@
+{
+  "name": "Ftnts",
+  "version": "1.0.0",
+  "description": "Footnotes in Wordpress, the easy way.",
+  "main": "gulpfile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/moritzjacobs/ftnts"
+  },
+  "author": "Moritz Jacobs",
+  "license": "GPL-3.0",
+  "devDependencies": {
+    "gulp-autoprefixer": "^3.1.0",
+    "gulp-babel": "5.1.0",
+    "gulp-cache": "0.2.8",
+    "gulp-jshint": "1.10.0",
+    "gulp-imagemin": "2.2.1",
+    "gulp-plumber": "1.0.0",
+    "gulp-rename": "1.2.2",
+    "gulp-sass": "^3.1.0",
+    "gulp-uglify": "1.2.0",
+    "gulp": "^3.9.1"
+  }
+}
