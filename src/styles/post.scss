@@ -1,0 +1,7 @@
+.mce-container[aria-label="ftnts"] {
+	.mce-container,
+	.mce-first.mce-last,
+	.mce-first.mce-last > * {
+		height: 90% !important;
+	}
+}

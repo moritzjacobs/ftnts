@@ -1,0 +1,95 @@
+html {
+	counter-reset: ftnts-marker ftnts-footnote; 
+}
+
+.ftnts-marker {
+	box-sizing: border-box;
+	position: relative;
+	display: inline-block;
+	cursor: pointer;
+	width: 1em;
+	top: -0.25em;
+
+	&:after {
+		display: inline-block;
+		position: relative;
+		counter-increment: ftnts-marker;
+		content: counter(ftnts-marker);
+		width: 1em;
+
+		box-sizing: border-box;
+		
+		text-align: center;
+		font-size: 0.66em;
+		line-height: 1;
+		cursor: pointer;
+	}
+
+	transition: background-color 0.5s;
+	&.em:after {
+		border: 2px solid #ff0;
+		border-radius: 0.2em;
+		background-color: rgba(#ff0, 0.3);
+		@keyframes ftnts-marker-pulse {
+			0%, 100% {
+				transform: scale(1);
+			}
+
+			50% {
+				transform: scale(1.2);
+			}
+		}
+		animation: ftnts-marker-pulse 0.5s 1;
+	}
+}
+
+.ftnts-footnotes {
+	margin-top: 2em;
+	border-top: 2px solid black;
+	padding-top: 2em;
+}
+
+
+
+
+
+.ftnts-footnote {
+	position: relative;
+	margin: 1em 0;
+	padding: 1em;
+	padding-left: 2em;
+
+	cursor: pointer;
+
+
+	&:before {
+		display: inline-block;
+		counter-increment: ftnts-footnote;
+		content: counter(ftnts-footnote);
+		margin-left: -1.5em;
+		margin-right: 1em;
+		box-sizing: border-box;
+		
+		
+		text-align: center;
+		font-size: 0.75em;
+		line-height: 0;
+	}
+
+	transition: background-color 0.5s;
+
+	&.em {
+		border-radius: 0.5em;
+		background-color: rgba(#ff0, 0.3);
+		@keyframes ftnts-footnote-pulse {
+			0%, 100% {
+				transform: scale(1);
+			}
+
+			50% {
+				transform: scale(1.05);
+			}
+		}
+		animation: ftnts-footnote-pulse 0.5s 1;
+	}
+}

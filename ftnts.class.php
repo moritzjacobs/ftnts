@@ -38,12 +38,10 @@ class Ftnts extends FtntsBaseClass {
 	
 
 	private $preferences = array(
-		// 'admin_css' => array("public/css/admin.css"),
-		// 'public_css' => array("css/public.css"),
-		'admin_js' => array(
-			"dist/js/admin.js"
-		),
-		// 'public_js' => array("js/public.js"),
+		'admin_css' => array("dist/styles/post.css"),
+		'public_css' => array("dist/styles/public.css"),
+		'admin_js' => array("dist/scripts/admin.js"),
+		'public_js' => array("dist/scripts/public.js"),
 	);
 
 
@@ -71,7 +69,10 @@ class Ftnts extends FtntsBaseClass {
 	*
 	****************************************************/
 
+	private static $ftnts = array();
+
 	public function initialize() {
+
 		$this->add_settings_page("Ftnts Settings", array($this, "load_settings_page"));
 		
 		add_filter('mce_css', function($stylesheets){
@@ -99,6 +100,35 @@ class Ftnts extends FtntsBaseClass {
 			array_push($buttons, "ftnts");
 			return $buttons;
 		});
+
+		
+		add_filter('tiny_mce_before_init', function($init) {
+			// Command separated string of extended elements
+			$ext = 'ftnt[*]';
+			// Add to extended_valid_elements if it alreay exists
+			if (isset($init['extended_valid_elements'])) {
+				$init['extended_valid_elements'] .= ',' . $ext;
+			} else {
+				$init['extended_valid_elements'] = $ext;
+			}
+
+			return $init;
+		});
+
+		add_shortcode('ftnts', function($atts, $content=""){
+			self::$ftnts[$atts["id"]] = $atts["content"];
+			return "<span class='ftnts-marker' data-ftnts-for='".$atts["id"]."'></span>";
+		});
+
+		add_filter('the_content', function($the_content){
+			$ftnts = "<div class='ftnts-footnotes'>";
+			foreach(self::$ftnts as $id => $content) {
+				$ftnts .= "<div class='ftnts-footnote' data-ftnts-id='".$id."'>".$content."</div>";
+			}
+			$ftnts .= "</div>";
+			return $the_content . $ftnts;
+		}, 12);
+		
 	}
 
 

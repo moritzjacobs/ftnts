@@ -8,11 +8,9 @@ $size: 1.2em;
 .ftnts-wrapper {
 	box-sizing: border-box;
 	position: relative;
-	display: inline;
-	padding: 0.1em;
-	background-color: rgba($em-color, 0.05);
-	border: 1px dotted rgba($em-color, 0.2);
-	margin-right: $size;
+	display: inline-block;
+	width: $size;
+	cursor: pointer;
 
 	&:after {
 		position: relative;
@@ -24,7 +22,7 @@ $size: 1.2em;
 		pointer-events: none;
 		
 		top: -1em;
-		left: 0.5 * $size;
+		left: 25%;
 		padding: $size / 2 $size / 5;
 		background-color: $em-color;
 		
@@ -35,6 +33,15 @@ $size: 1.2em;
 		font-weight: normal;
 		font-style: none;
 		font-family: monospace;
+		cursor: pointer;
 	}
 }
 
+.ftnts-input {
+
+	padding: 1em;
+
+	h1 {
+		color: red;
+	}
+}
