@@ -48,6 +48,7 @@
 					height: 400,
 					body: {
 						type: 'textbox',
+						rows: 15,
 						name: 'ftnt_content',
 						multiline: true,
 						label  : '',
