@@ -12,17 +12,24 @@ class Ftnts {
 	function __construct() {
 		$this->ftnts = array();
 
+		// add css to tinymce
 		add_filter('mce_css', function ($stylesheets) {
 			$css = plugins_url("public/css/mce.css", __FILE__);
 			$ret = $stylesheets .= "," . $css;
 			return $ret;
 		});
 
+		// add css to frontend
+		add_filter('wp_footer', [$this, "frontend_css"]);
+		add_filter('wp_footer', [$this, "frontend_js"]);
+
+		// add script bridge to admin head
 		add_action('admin_head', function () {
 			$data = ["pluginRoot" => plugins_url("", __FILE__)];
 			echo '<script type="text/javascript"> var ftnts = ' . json_encode($data) . ';</script>';
 		});
 
+		// add plugin to tinymce
 		add_filter("mce_external_plugins", function ($plugin_array) {
 			$plugin_array["ftnts"] = plugins_url('/public/js/mce.js', __FILE__);
 			return $plugin_array;
@@ -34,7 +41,6 @@ class Ftnts {
 		});
 
 		add_filter('tiny_mce_before_init', function ($init) {
-			// Command separated string of extended elements
 			$ext = 'ftnt[*]';
 			// Add to extended_valid_elements if it alreay exists
 			if (isset($init['extended_valid_elements'])) {
@@ -46,25 +52,47 @@ class Ftnts {
 			return $init;
 		});
 
+		// add shortcode for frontend
 		add_shortcode('ftnts', [$this, "frontend_shortcode"]);
-		add_filter('the_content', [$this, "content_filter"], 12);
 	}
 
-	public function content_filter($the_content) {
+	/**
+	 * Add footnotes to end of content
+	 */
+	public function render() {
 		$ftnts = "<div class='ftnts-footnotes'>";
 		foreach ($this->ftnts as $id => $content) {
 			$ftnts .= "<div class='ftnts-footnote' data-ftnts-id='" . $id . "'>" . $content . "</div>";
 		}
 		$ftnts .= "</div>";
-		return $the_content . $ftnts;
+
+		return $ftnts;
 	}
 
-	public function frontend_shortcode($atts, $content = "") {
-// 		var_dump($this->ftnts);
-		$this->ftnts[$atts["id"]] = $atts["content"];
-		return "<span class='ftnts-marker' data-ftnts-for='" . $atts["id"] . "'></span>";
+	/**
+	 * Transform shortcode to html
+	 */
+	public function frontend_shortcode($atts) {;
+		$content = htmlentities($atts["content"]);
+		$this->ftnts[$atts["id"]] = $content;
+		return "<span class='ftnts-marker' data-ftnts-content='".$content."' data-ftnts-for='" . $atts["id"] . "'></span>";
+	}
+
+	public function frontend_css() {
+		if(empty($this->ftnts)) { return; }
+
+		$css = dirname(__FILE__) . "/public/css/public.css";
+		echo "<style>".file_get_contents($css)."</style>";
+	}
+
+	public function frontend_js() {
+		if(empty($this->ftnts)) { return; }
+		$src = plugins_url('/public/js/public.js', __FILE__);
+
+		echo "<script src='" . $src . "'></script>";
 	}
 }
 
 // Initalize
+global $Ftnts;
 $Ftnts = new Ftnts();

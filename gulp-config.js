@@ -123,7 +123,6 @@ module.exports = {
 		svg: ["svg"],
 		css: ["css"],
 		jsWatch: ["js"],
-		js: ["js"],
 		copy: ["copy"]
 	}
 };

@@ -1,9 +1,5 @@
 ($ => {
 
-	$(".ftnts-wrapper").on(() => {
-		alert("ok");
-	});
-
 	tinymce.create("tinymce.plugins.ftnts", {
 
 		init(editor) {
