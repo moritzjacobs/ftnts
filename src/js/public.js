@@ -1,7 +1,5 @@
 ($ => {
-	"use strict";
-
-	$(document).ready(() => {
+    $(document).ready(() => {
 		const ftnts_markers = $("[data-ftnts-for]");
 		const ftnts_footnotes = $("[data-ftnts-id]")
 

@@ -1,6 +1,6 @@
-((($) => {
+($ => {
 
-	$(".ftnts-wrapper").on(function(){
+	$(".ftnts-wrapper").on(() => {
 		alert("ok");
 	});
 
@@ -13,7 +13,7 @@
 			editor.addButton("ftnts", {
 				title : ftnts.label,
 				cmd : "ftnts_command",
-				image : `${ftnts.pluginRoot}/dist/images/ftnts.svg`
+				image : `${ftnts.pluginRoot}/public/img/ftnts.svg`
 			});
 
 			//replace shortcode before editor content set
@@ -121,4 +121,4 @@
 	});
 
 	tinymce.PluginManager.add("ftnts", tinymce.plugins.ftnts);
-}))(jQuery);
+})(jQuery);
