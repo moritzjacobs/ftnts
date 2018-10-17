@@ -1,0 +1,2 @@
+html .mceContentBody{counter-reset:ftnts}.ftnts-wrapper{box-sizing:border-box;position:relative;display:inline-block;width:1.2em;cursor:pointer}.ftnts-wrapper:after{position:relative;counter-increment:ftnts;content:counter(ftnts);box-sizing:border-box;display:inline-block;pointer-events:none;top:-1em;left:25%;padding:.6em .24em;background-color:tomato;text-align:center;color:#fff;font-size:.6em;line-height:0;font-weight:400;font-style:none;font-family:monospace;cursor:pointer}.ftnts-input{padding:1em}.ftnts-input h1{color:red}
+/*# sourceMappingURL=mce.css.map */
